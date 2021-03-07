@@ -173,7 +173,7 @@ _Abrir el navegador preferido que utilicen y abrir las siguientes urls_
 
 ```bash
 
-[http://portal.midominiomtie.net](#http://portal.midominiomtie.net/)
+http://portal.midominiomtie.net
 
 ```
 
@@ -183,7 +183,7 @@ _Abrir el navegador preferido que utilicen y abrir las siguientes urls_
 
 ```bash
 
-[http://angular.midominiomtie.net](#http://angular.midominiomtie.net/)
+http://angular.midominiomtie.net
 
 ```
 
@@ -192,8 +192,7 @@ _Abrir el navegador preferido que utilicen y abrir las siguientes urls_
 ### Monitor
 
 ```bash
-
-[http://monitor.midominiomtie.net](#http://monitor.midominiomtie.net/)
+http://monitor.midominiomtie.net
 
 ```
 
@@ -203,7 +202,7 @@ _Abrir el navegador preferido que utilicen y abrir las siguientes urls_
 
 ```bash
 
-[http://wordpress.midominiomtie.net](#http://wordpress.midominiomtie.net/)
+http://wordpress.midominiomtie.net
 
 ```
 
@@ -213,7 +212,7 @@ _Abrir el navegador preferido que utilicen y abrir las siguientes urls_
 
 ```bash
 
-[http://apinode.midominiomtie.net](#http://apinode.midominiomtie.net/)
+http://apinode.midominiomtie.net
 
 ```
 
@@ -223,7 +222,7 @@ _Abrir el navegador preferido que utilicen y abrir las siguientes urls_
 
 ```bash
 
-[http://apinetcore.midominiomtie.net/WeatherForecast](#http://apinetcore.midominiomtie.net/WeatherForecast)
+http://apinetcore.midominiomtie.net/WeatherForecast
 
 ```
 
