@@ -1,0 +1,300 @@
+#########################################################################################################################
+#                                                                                                                       #
+#   -- Autor:   Miguel Manuel Martínez Vázquez                                                                          #
+#   -- Fecha Creación:          13/01/2021                                                                              #
+#   -- Fecha Actualización:     15/01/2021                                                                              #
+#   -- Descripción: SOA - Servicios Docker Compose                                                                      #
+#                                                                                                                       #
+#   - Instalación de contenedores                                                                                       #
+#       - NGINX Reverse Proxy                                                                                           #
+#       - NGINX                                                                                                         #
+#       - MySQL v.8                                                                                                     #
+#       - MongoDB                                                                                                       #
+#       - MS SQL 2017                                                                                                   #
+#       - Angular                                                                                                       #
+#       - Net Core Api                                                                                                  #
+#       - NodeJS Api                                                                                                    #
+#       - Net Data                                                                                                      #
+#       - Wordpress                                                                                                     #
+#                                                                                                                       #
+#   - Comandos de ejecución básicos:                                                                                    #
+#       -- Crear e iniciar contenedores                                                                                 #
+#           $ docker-compose up -d                                                                                      #
+#                                                                                                                       #
+#       -- Detenga y elimine contenedores, redes, imágenes y volúmenes                                                  #
+#           $ docker-compose down                                                                                       #
+#                                                                                                                       #
+#       -- Crear e iniciar contenedores con un archivo de redacción alternativo a                                       #
+#          docker-compose.yml y docker-compose.yaml                                                                     #
+#           $ docker-compose -f nombre.yml up -d                                                                        #
+#                                                                                                                       #
+#       -- Especifica un nombre de perfil para habilitar el paquete                                                     #
+#          docker-compose.yml y docker-compose.yaml                                                                     #
+#           $ docker-compose -f nombre.yml -p NOMBRE_PERFIL up -d                                                       #
+#                                                                                                                       #
+#                                                                                                                       #
+#                                                                                                                       #
+#   - Ejecución y definición de opciones para múltiples contenedores                                                    #
+#       -- Uso: $ docker-compose [-f <arg>...] [--profile <name>...] [options] [COMMAND] [ARGS...]                      #
+#               $ docker-compose -h|--help                                                                              #
+#                                                                                                                       #
+#       -- Opciones:                                                                                                    #
+#           -f, --file FILE                 Especifica un archivo de composición alternativo                            #
+#                                              (predeterminado: docker-compose.yml)                                     #
+#            -p, --project-name NAME        Especifica un nombre de proyecto alternativo                                #
+#                                               (predeterminado: nombre del directorio)                                 #
+#            --profile NAME                 Especifica un perfil para habilitar                                         #
+#            --verbose                      Mostrar más resultados                                                      #
+#            --log-level LEVEL              Establecer el nivel de registro                                             #
+#                                              (DEBUG, INFO, WARNING, ERROR, CRITICAL)                                  #
+#            --no-ansi                      No imprime caracteres de control ANSI                                       #
+#            -v, --version                  Versión para imprimir y salir                                               #
+#            -H, --host HOST                Demonio socket al que conectarse                                            #
+#                                                                                                                       #
+#            --tls                          Utilice TLS; implícito por --tlsverify                                      #
+#            --tlscacert CA_PATH            Certificados de confianza firmados solo por esta CA                         #
+#            --tlscert CLIENT_CERT_PATH     Ruta al archivo de certificado TLS                                          #
+#            --tlskey TLS_KEY_PATH          Ruta al archivo de claves TLS                                               #
+#            --tlsverify                    Use TLS y verifique el control remoto                                       #
+#            --skip-hostname-check          No verifique el nombre de host del demonio con el                           #
+#                                           nombre especificado en el certificado del cliente                           #
+#            --project-directory PATH       Especifica un directorio de trabajo alternativo                             #
+#                                               (predeterminado: la ruta del archivo de redacción)                      #
+#            --compatibility                Si se establece, Compose intentará convertir la                             #
+#                                           implementación claves en archivos v3 a su equivalente no Swarm              #
+#                                                                                                                       #
+#       -- Comandos:                                                                                                    #
+#           build	    Construir o reconstruir servicios                                                                 #
+#           bundle	    Genere un paquete de Docker desde el archivo Compose                                            #
+#           config	    Validar y ver el archivo de redacción                                                           #
+#           create	    Crear servicios                                                                                 #
+#           down	    Detenga y elimine contenedores, redes, imágenes y volúmenes                                       #
+#           events	    Reciba eventos en tiempo real desde contenedores                                                #
+#           exec	    Ejecutar un comando en un contenedor en ejecución                                                 #
+#           help	    Obtenga ayuda en un comando                                                                       #
+#           images	    Lista de imágenes                                                                               #
+#           kill	    Matar contenedores                                                                                #
+#           logs	    Ver salida de contenedores                                                                        #
+#           pause	    Pausar servicios                                                                                  #
+#           port	    Imprima el puerto público para un enlace de puerto                                                #
+#           ps	        Lista de contenedores                                                                           #
+#           pull	    Imágenes de pull service                                                                          #
+#           push	    Imágenes de push service                                                                          #
+#           restart	    Reiniciar servicios                                                                             #
+#           rm	        Retire los contenedores detenidos                                                               #
+#           run	        Ejecuta un comando único                                                                        #
+#           scale	    Establecer el número de contenedores para un servicio                                             #
+#           start	    Iniciar servicios                                                                                 #
+#           stop	    Detener servicios                                                                                 #
+#           top	        Mostrar los procesos en ejecución                                                               #
+#           unpause	    Reanudar servicios                                                                              #
+#           up	        Crear e iniciar contenedores                                                                    #
+#           version	    Mostrar la información de la versión de Docker-Compose                                          #
+#                                                                                                                       #
+#                                                                                                                       #
+#########################################################################################################################
+
+#########################################
+#               Version                 #
+#########################################
+version: "3.1"
+
+services:
+  #########################################
+  #            Reverse Proxy              #
+  #########################################
+  reverse-proxy:
+    image: jwilder/nginx-proxy:alpine
+    container_name: "Reverse-Proxy"
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - certs:/etc/nginx/certs:ro
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+  #########################################
+  #          Servidor Web NGINX1          #
+  #########################################
+  nginx:
+    depends_on:
+      - reverse-proxy
+    image: nginx
+    container_name: Nginx-Container-N01
+    restart: always
+    volumes:
+      - ./src/startbootstrap-sb-admin-2:/usr/share/nginx/html
+    environment:
+      - VIRTUAL_HOST=portal.midominiomtie.net
+  #########################################
+  #           Servidor Web NGINX2         #
+  #########################################
+  nginx2:
+    depends_on:
+      - nginx
+    image: nginx
+    container_name: Nginx-Container-N02
+    restart: always
+    volumes:
+      - ./src/startbootstrap-sb-admin-2:/usr/share/nginx/html
+    environment:
+      - VIRTUAL_HOST=portal.midominiomtie.net
+  #########################################
+  #           Servidor Web NGINX3         #
+  #########################################
+  nginx3:
+    depends_on:
+      - nginx2
+    image: nginx
+    container_name: Nginx-Container-N03
+    restart: always
+    volumes:
+      - ./src/startbootstrap-sb-admin-2:/usr/share/nginx/html
+    environment:
+      - VIRTUAL_HOST=portal.midominiomtie.net
+  #########################################
+  #           Servidor Web NGINX4         #
+  #########################################
+  nginx4:
+    depends_on:
+      - nginx3
+    image: nginx
+    container_name: Nginx-Container-N04
+    restart: always
+    volumes:
+      - ./src/startbootstrap-sb-admin-2:/usr/share/nginx/html
+    environment:
+      - VIRTUAL_HOST=portal.midominiomtie.net
+  #########################################
+  #             Net Core API              #
+  #########################################
+  netcore:
+    container_name: "API-NETCore"
+    build:
+      context: ./src/apinetcore
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - VIRTUAL_HOST=apinetcore.midominiomtie.net
+  #########################################
+  #                 MySQL                 #
+  #########################################
+  mysql:
+    image: mysql:8
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: MySQL-Container
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "mysqladmin"
+      MYSQL_DATABASE: "wordpress"
+    volumes:
+      - ~/src/volumes/mysql/data:/var/lib/mysql
+  #########################################
+  #                MongoDB                #
+  #########################################
+  mongo:
+    image: mongo
+    command: mongod --auth
+    container_name: Mongo-Container
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "dba-root"
+      MONGO_INITDB_ROOT_PASSWORD: "mongoadmin"
+    volumes:
+      - ~/src/volumes/mongo/data/db:/data/db
+  #########################################
+  #              MSSQL Express            #
+  #########################################
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    container_name: MSSQL-Container
+    restart: always
+    ports:
+      - 1433:1433
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "5q1@dw1UMTI3"
+      MSSQL_PID: "Express"
+    volumes:
+      - ~/src/volumes/mssql/data:/var/opt/mssql
+  #########################################
+  #                 NetData               #
+  #########################################
+  netdata:
+    container_name: "MONITOR"
+    image: netdata/netdata
+    restart: always
+    expose:
+      - "19999"
+    volumes:
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - netdata-etc:/etc/netdata
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor=unconfined
+    environment:
+      - VIRTUAL_HOST=monitor.midominiomtie.net
+      - VIRTUAL_PORT=19999
+      - DOCKER_HOST=proxy:2375
+      - PGID=999
+      - VIRTUALIZATION=kvm
+  #########################################
+  #               NodeJS API              #
+  #########################################
+  nodejs:
+    container_name: "API-NodeJS"
+    build:
+      context: ./src/deploy-node
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - VIRTUAL_HOST=apinode.midominiomtie.net
+  #########################################
+  #             Wordpress                 #
+  #########################################
+  wordpress:
+    depends_on:
+      - mysql
+    image: wordpress:php7.2-apache
+    container_name: "WordPress"
+    environment:
+      - WORDPRESS_DB_HOST=mysql
+      - WORDPRESS_DB_USER=root
+      - WORDPRESS_DB_PASSWORD=mysqladmin
+      - WORDPRESS_DB_NAME=wordpress
+      - VIRTUAL_HOST=wordpress.midominiomtie.net
+    links:
+      - mysql:mysql
+    volumes:
+      - ~/src/volumes/wordpress:/var/www/html/wp-content
+      - ~/src/volumes/wordpress:/var/www/html/wp-includes
+  #########################################
+  #               Angular                 #
+  #########################################
+  angular:
+    container_name: "App-Angular-N01"
+    build:
+      context: ./src/app-angular
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - VIRTUAL_HOST=angular.midominiomtie.net
+#########################################
+#               Volumes                 #
+#########################################
+volumes:
+  certs:
+  html:
+  vhostd:
+  netdata-etc:
