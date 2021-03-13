@@ -171,7 +171,7 @@ services:
   #             Net Core API              #
   #########################################
   netcore:
-    container_name: "API-NETCore"
+    container_name: "Api-NETCore"
     build:
       context: ./src/apinetcore
       dockerfile: Dockerfile
@@ -184,7 +184,7 @@ services:
   mysql:
     image: mysql:8
     command: --default-authentication-plugin=mysql_native_password
-    container_name: MySQL-Container
+    container_name: "MySQL"
     restart: always
     ports:
       - 3306:3306
@@ -199,7 +199,7 @@ services:
   mongo:
     image: mongo
     command: mongod --auth
-    container_name: Mongo-Container
+    container_name: "MongoDB"
     restart: always
     ports:
       - 27017:27017
@@ -213,7 +213,7 @@ services:
   #########################################
   mssql:
     image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
-    container_name: MSSQL-Container
+    container_name: "MSSQL"
     restart: always
     ports:
       - 1433:1433
@@ -227,7 +227,7 @@ services:
   #                 NetData               #
   #########################################
   netdata:
-    container_name: "MONITOR"
+    container_name: "Monitor"
     image: netdata/netdata
     restart: always
     expose:
@@ -253,7 +253,7 @@ services:
   #               NodeJS API              #
   #########################################
   nodejs:
-    container_name: "API-NodeJS"
+    container_name: "Api-NodeJS"
     build:
       context: ./src/deploy-node
       dockerfile: Dockerfile
