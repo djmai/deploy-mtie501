@@ -266,7 +266,7 @@ services:
   wordpress:
     depends_on:
       - mysql
-    image: wordpress:php7.2-apache
+    image: wordpress:php7.4-apache
     container_name: "WordPress"
     environment:
       - WORDPRESS_DB_HOST=mysql
@@ -290,6 +290,21 @@ services:
     restart: always
     environment:
       - VIRTUAL_HOST=angular.midominiomtie.net
+  #########################################
+  #              Portainer                #
+  #########################################
+  portainer:
+    image: portainer/portainer
+    container_name: "Portainer"
+    # ports:
+      # - "9500:9000"
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    enviroment:
+      - VIRTUAL_HOST=portainer.midominiomtie.net
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
 #########################################
 #               Volumes                 #
 #########################################
@@ -298,3 +313,4 @@ volumes:
   html:
   vhostd:
   netdata-etc:
+  portainer_data:
