@@ -111,7 +111,7 @@ _Si no tenemos docker y docker compose en nuestro equipo ejecuta lo siguiente_
 # Abrimos una terminal y escribimos lo siguiente
 # Recuerda estar dentro de la carpeta de nuestro proyecto deploy-mti501
 
-> ./install_docker.sh
+> sudo sh ./install_docker.sh
 
 ```
 
