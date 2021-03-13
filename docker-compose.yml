@@ -300,7 +300,7 @@ services:
       # - "9500:9000"
     command: -H unix:///var/run/docker.sock
     restart: always
-    enviroment:
+    environment:
       - VIRTUAL_HOST=portainer.midominiomtie.net
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
